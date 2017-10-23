@@ -12,7 +12,7 @@ from datetime import datetime, timedelta
  
 ec2 = boto3.client('ec2', region_name='us-east-2')
 iam = boto3.client('iam')
- 
+dayn=<Insert no of days here>
 def lambda_handler(event, context):
     
     account_ids = list()
@@ -36,7 +36,7 @@ def lambda_handler(event, context):
 		for snap in snapshot_response['Snapshots']:
 		    sna_ID = snap['StartTime']
 		    sna_ID = sna_ID.strftime('%Y-%m-%d')
-		    delete_on = datetime.today() - timedelta(days=3)
+		    delete_on = datetime.today() - timedelta(days=dayn)
 		    delete_on = delete_on.strftime('%Y-%m-%d')
 		    if sna_ID < delete_on:
 		        print "Deleting snapshot %s" % snap['SnapshotId']
